@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Teacher Dashboard</title>
+<style>
+    body { 
+        font-family: Arial, sans-serif; 
+        background: #f4f6f8; 
+        margin: 0; 
+        padding: 0; 
+    }
+    header { 
+        background: #333; 
+        color: white; 
+        padding: 10px; 
+        text-align: center; 
+    }
+    main { 
+        padding: 20px; 
+        max-width: 800px; 
+        margin: auto; 
+    }
+    section { 
+        background: white; 
+        padding: 15px; 
+        margin-bottom: 20px; 
+        border-radius: 8px; 
+        box-shadow: 0 0 5px rgba(0,0,0,0.1); 
+    }
+    h2 { 
+        margin-top: 0; 
+    }
+    input, button, select { 
+        padding: 10px; 
+        margin: 8px 0; 
+        width: 100%; 
+        box-sizing: border-box;   /* ensures inputs fit in box */
+        border: 1px solid #ccc; 
+        border-radius: 5px; 
+        font-size: 14px; 
+    }
+    button { 
+        background: #007bff; 
+        color: white; 
+        border: none; 
+        cursor: pointer; 
+        transition: background 0.2s; 
+    }
+    button:hover { 
+        background: #0056b3; 
+    }
+</style>
+</head>
+<body>
+<header>
+    <h1>Teacher Dashboard</h1>
+</header>
+
+<main>
+    <section>
+        <h2>Connect Wallet</h2>
+        <button onclick="connectWallet()">Connect MetaMask</button>
+        <p id="account">Not connected</p>
+        <p id="owner"></p>
+    </section>
+
+    <section>
+        <h2>Add Student</h2>
+        <input id="studentName" placeholder="Student Name">
+        <input id="studentRoll" placeholder="Roll Number">
+        <input id="studentAddress" placeholder="Wallet Address">
+        <button onclick="addStudent()">Add Student</button>
+    </section>
+
+    <section>
+        <h2>Mark Attendance</h2>
+        <input id="attendAddress" placeholder="Student Wallet Address">
+        <input id="attendDate" placeholder="Date (YYYY-MM-DD)">
+        <select id="attendStatus">
+            <option value="true">Present</option>
+            <option value="false">Absent</option>
+        </select>
+        <button onclick="markAttendance()">Mark Attendance</button>
+    </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+<script src="shared.js"></script>
+</body>
+</html>

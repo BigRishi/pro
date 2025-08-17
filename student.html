@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Dashboard</title>
+<style>
+    body { 
+        font-family: Arial, sans-serif; 
+        background: #f4f6f8; 
+        margin: 0; 
+        padding: 0; 
+    }
+    header { 
+        background: #333; 
+        color: white; 
+        padding: 10px; 
+        text-align: center; 
+    }
+    main { 
+        padding: 20px; 
+        max-width: 800px; 
+        margin: auto; 
+    }
+    section { 
+        background: white; 
+        padding: 15px; 
+        margin-bottom: 20px; 
+        border-radius: 8px; 
+        box-shadow: 0 0 5px rgba(0,0,0,0.1); 
+    }
+    h2 { 
+        margin-top: 0; 
+    }
+    input, button { 
+        padding: 10px; 
+        margin: 8px 0; 
+        width: 100%; 
+        box-sizing: border-box;   /* keeps input inside section */
+        border: 1px solid #ccc; 
+        border-radius: 5px; 
+        font-size: 14px; 
+    }
+    button { 
+        background: #007bff; 
+        color: white; 
+        border: none; 
+        cursor: pointer; 
+        transition: background 0.2s; 
+    }
+    button:hover { 
+        background: #0056b3; 
+    }
+</style>
+</head>
+<body>
+<header>
+    <h1>Student Dashboard</h1>
+</header>
+
+<main>
+    <section>
+        <h2>Connect Wallet</h2>
+        <button onclick="connectWallet()">Connect MetaMask</button>
+        <p id="account">Not connected</p>
+    </section>
+
+    <section>
+        <h2>My Profile</h2>
+        <button onclick="viewMyProfile()">View Profile</button>
+        <p id="profile"></p>
+    </section>
+
+    <section>
+        <h2>My Attendance</h2>
+        <input id="myDate" placeholder="Date (YYYY-MM-DD)">
+        <button onclick="viewMyAttendance()">View Attendance</button>
+        <p id="myAttendance"></p>
+    </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+<script src="shared.js"></script>
+</body>
+</html>

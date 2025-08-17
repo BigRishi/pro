@@ -1,0 +1,115 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
+
+contract AttendanceSystem {
+    address public owner;
+    
+    struct Student {
+        string name;
+        string rollNumber;
+        address walletAddress;
+        bool isRegistered;
+    }
+    
+    struct AttendanceRecord {
+        bool isPresent;
+        uint256 timestamp;
+        bool exists;
+    }
+    
+    // Mappings
+    mapping(address => Student) public students;
+    mapping(string => address) public rollNumberToAddress;
+    mapping(address => mapping(string => AttendanceRecord)) public attendance; // student address => date => attendance
+    
+    address[] public studentAddresses;
+    
+    // Events
+    event StudentAdded(address indexed studentAddress, string name, string rollNumber);
+    event AttendanceMarked(address indexed studentAddress, string date, bool isPresent);
+    
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only owner can perform this action");
+        _;
+    }
+    
+    modifier onlyRegisteredStudent() {
+        require(students[msg.sender].isRegistered, "Only registered students can perform this action");
+        _;
+    }
+    
+    constructor() {
+        owner = msg.sender;
+    }
+    
+    // Admin Functions
+    function addStudent(string memory _name, string memory _rollNumber, address _walletAddress) public onlyOwner {
+        require(!students[_walletAddress].isRegistered, "Student already registered");
+        require(rollNumberToAddress[_rollNumber] == address(0), "Roll number already exists");
+        require(_walletAddress != address(0), "Invalid wallet address");
+        
+        students[_walletAddress] = Student({
+            name: _name,
+            rollNumber: _rollNumber,
+            walletAddress: _walletAddress,
+            isRegistered: true
+        });
+        
+        rollNumberToAddress[_rollNumber] = _walletAddress;
+        studentAddresses.push(_walletAddress);
+        
+        emit StudentAdded(_walletAddress, _name, _rollNumber);
+    }
+    
+    function markAttendance(address _studentAddress, string memory _date, bool _isPresent) public onlyOwner {
+        require(students[_studentAddress].isRegistered, "Student not registered");
+        
+        attendance[_studentAddress][_date] = AttendanceRecord({
+            isPresent: _isPresent,
+            timestamp: block.timestamp,
+            exists: true
+        });
+        
+        emit AttendanceMarked(_studentAddress, _date, _isPresent);
+    }
+    
+    // View Functions
+    function getStudent(address _studentAddress) public view returns (string memory name, string memory rollNumber, address walletAddress, bool isRegistered) {
+        Student memory student = students[_studentAddress];
+        return (student.name, student.rollNumber, student.walletAddress, student.isRegistered);
+    }
+    
+    function getStudentByRollNumber(string memory _rollNumber) public view returns (address studentAddress, string memory name) {
+        address addr = rollNumberToAddress[_rollNumber];
+        require(addr != address(0), "Student not found");
+        return (addr, students[addr].name);
+    }
+    
+    function getAttendance(address _studentAddress, string memory _date) public view returns (bool isPresent, uint256 timestamp, bool exists) {
+        AttendanceRecord memory record = attendance[_studentAddress][_date];
+        return (record.isPresent, record.timestamp, record.exists);
+    }
+    
+    function getAllStudents() public view returns (address[] memory) {
+        return studentAddresses;
+    }
+    
+    function getStudentCount() public view returns (uint256) {
+        return studentAddresses.length;
+    }
+    
+    // Student Functions
+    function getMyAttendance(string memory _date) public view onlyRegisteredStudent returns (bool isPresent, uint256 timestamp, bool exists) {
+        return getAttendance(msg.sender, _date);
+    }
+    
+    function getMyProfile() public view onlyRegisteredStudent returns (string memory name, string memory rollNumber) {
+        Student memory student = students[msg.sender];
+        return (student.name, student.rollNumber);
+    }
+    
+    // Utility function to check if student is registered
+    function isStudentRegistered(address _studentAddress) public view returns (bool) {
+        return students[_studentAddress].isRegistered;
+    }
+}
