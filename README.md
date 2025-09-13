@@ -23,12 +23,12 @@ It allows teachers to add students, mark attendance, and students to view their 
 - HTML/CSS/JS – User-friendly dashboards  
 
 ## Project Structure
-attendance/
--│── index.html # Login page
--│── teacher.html # Teacher dashboard
--│── student.html # Student dashboard
--│── shared.js # Shared Web3 & contract logic
--│── AttendanceSystem.sol # Solidity smart contract
+- attendance/
+ - │── index.html # Login page
+ - │── teacher.html # Teacher dashboard
+ - │── student.html # Student dashboard
+ - │── shared.js # Shared Web3 & contract logic
+ - │── AttendanceSystem.sol # Solidity smart contract
 
 ## How to Run
 1. Clone this repo  
