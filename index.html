@@ -4,21 +4,68 @@
 <meta charset="UTF-8">
 <title>Attendance System - Login</title>
 <style>
-    body { font-family: Arial, sans-serif; background: #f4f6f8; margin: 0; padding: 0; }
-    header { background: #333; color: white; padding: 10px; text-align: center; }
-    main { padding: 50px; max-width: 400px; margin: auto; text-align: center; }
-    button { padding: 12px; margin: 15px; width: 100%; background: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; }
-    button:hover { background: #0056b3; }
+    body { 
+        font-family: "Lato", Arial, sans-serif; 
+        background: #f8f5f1; /* Light beige */
+        margin: 0; 
+        padding: 0; 
+        height: 100vh; 
+        display: flex; 
+        flex-direction: column; 
+    }
+    header { 
+        background: #2e3b55; /* Navy */
+        color: #f8f5f1; /* Beige text */
+        padding: 15px; 
+        text-align: center; 
+    }
+    main { 
+        flex: 1; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+    }
+    .login-box {
+        background: #ffffff; 
+        padding: 40px; 
+        border-radius: 12px; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+        text-align: center; 
+        width: 100%; 
+        max-width: 400px;
+    }
+    h2 { 
+        margin-bottom: 25px; 
+        color: #2e3b55; /* Navy */
+    }
+    button { 
+        padding: 12px; 
+        margin: 12px 0; 
+        width: 100%; 
+        background: #aec8f4; /* Light blue */
+        color: #2e3b55; /* Navy text */
+        font-weight: bold;
+        border: none; 
+        border-radius: 6px; 
+        cursor: pointer; 
+        font-size: 16px; 
+        transition: background 0.3s ease; 
+    }
+    button:hover { 
+        background: #94b5f0; /* Slightly darker light blue */
+    }
 </style>
 </head>
 <body>
 <header>
-    <h1>Attendance System</h1>
+    <h1>Blockchain Attendance System</h1>
 </header>
 <main>
-    <h2>Login As</h2>
-    <button onclick="location.href='teacher.html'">Teacher</button>
-    <button onclick="location.href='student.html'">Student</button>
+    <div class="login-box">
+        <h2>Login As</h2>
+        <button onclick="location.href='teacher.html'">Teacher</button>
+        <button onclick="location.href='student.html'">Student</button>
+    </div>
 </main>
 </body>
 </html>
