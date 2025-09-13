@@ -15,7 +15,7 @@ It allows teachers to add students, mark attendance, and students to view their 
   - Connect wallet (MetaMask)
   - View own profile
   - Check attendance by date
-  - 
+  
 ## Technologies Used
 - Solidity (0.8.19) – Smart contract for attendance logic  
 - Web3.js – Frontend blockchain interaction  
